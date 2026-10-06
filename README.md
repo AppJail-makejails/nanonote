@@ -50,29 +50,19 @@ KEY                                                                   COMMENT
 
 ### User Attributes
 
-##### `${X11APPJAIL_APPNAME}:${X11APPJAIL_PROFILE}.jail.ephemeral`
-
-Mark the jail as ephemeral. See `ephemeral` option in `appjail-quick(1)` for details.
-
-Although the jail may be destroyed, its data is preserved in the user directory (see `${X11APPJAIL_USERDIR}` in `x11appjail-spec(5)`).
+| Name | Description |
+| --- | --- |
+| `ephemeral` | Mark the jail as ephemeral. See `ephemeral` option in `appjail-quick(1)` for details.<br><br>Although the jail may be destroyed, its data is preserved in the user directory (see `${X11APPJAIL_USERDIR}` in `x11appjail-spec(5)`).<br>|
 
 ### System Attributes
 
-##### `oci.from`
-
-Location of OCI image.
-##### `oci.tag`
-
-OCI image tag.
-##### `${X11APPJAIL_APPNAME}:${X11APPJAIL_PROFILE}.oci.from`
-
-Same as `oci.from`, but by application. It takes precedence when defined.
-##### `${X11APPJAIL_APPNAME}:${X11APPJAIL_PROFILE}.oci.tag`
-
-Same as `oci.tag`, but by application. It takes precedence when defined.
-##### `mount.system-fonts`
-
-Read-only mounts the fonts system inside the jail, configure Fontconfig, and rebuild the font cache.
+| Name | Description |
+| --- | --- |
+| `oci-from` | Location of OCI image.|
+| `oci-tag` | OCI image tag.|
+| `per-oci-from` | Same as `oci.from`, but by application. It takes precedence when defined.|
+| `per-oci-tag` | Same as `oci.tag`, but by application. It takes precedence when defined.|
+| `system-fonts` | Read-only mounts the fonts system inside the jail, configure Fontconfig, and rebuild the font cache.|
 
 ## OCI Configuration
 
