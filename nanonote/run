@@ -1,9 +1,9 @@
 #!/bin/sh
 
-JEXEC="${X11APPJAIL_BASEDIR}/usr/local/libexec/appjail/jexec/jexec"
+__run_program="nanonote"
+__perms_enable_3d=false
+__perms_enable_webcam=false
+__perms_enable_usb=false
+__perms_enable_sound=false
 
-exec "${JEXEC}" -l \
-    -U noroot \
-    -e DISPLAY="${X11APPJAIL_DISPLAY}" \
-    "${X11APPJAIL_JAIL}" \
-    nanonote "$@"
+. "${X11APPJAIL_WORKDIR}/appjail.d/run.subr"
