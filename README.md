@@ -78,8 +78,10 @@ Once you run the AppJail again, the OCI image is pulled again only if it is newe
 | Name | Description |
 | --- | --- |
 | `oci.from` | Location of OCI image.|
+| `oci.pull-policy` | Pull policy. Default is `newer`.<br><br>See `--pull` in `buildah-from(1)` for details.<br>|
 | `oci.tag` | OCI image tag.|
 | `<appname>:<profile>.oci.from` | Same as `oci.from`, but by application. It takes precedence when defined.|
+| `<appname>:<profile>.oci.pull-policy` | Same as `oci.pull-policy`, but by application. It takes precedence when defined.|
 | `<appname>:<profile>.oci.tag` | Same as `oci.tag`, but by application. It takes precedence when defined.|
 | `mount.system-fonts` | Read-only mounts the fonts system inside the jail, configure Fontconfig, and rebuild the font cache.|
 
