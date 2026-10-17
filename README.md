@@ -98,8 +98,6 @@ $ x11appjail destroy-jail nanonote
 | `<appname>:<profile>.dbus-user` | Configure the session bus mode. There are three modes:<br><br>1. `filter`: Enables filtering. This is the default mode unless explicitly stated otherwise.<br>2. `unfiltered`: Disables filtering. This mode is insecure and is recommended only for development.<br>3. `none`: Completely disables the session bus.<br>|
 | `<appname>:<profile>.dbus-user.<policy>.*` | Apply a policy or rule to the session bus, where `<type>` can be `own`, `call`, `talk`, `see`, and `broadcast`. See `xdg-dbus-proxy(1)` for details.|
 | `<appname>:<profile>.jail.ephemeral` | Mark the jail as ephemeral. See `ephemeral` option in `appjail-quick(1)` for details.<br><br>Although the jail may be destroyed, its data is preserved in the user directory (see `${X11APPJAIL_USERDIR}` in `x11appjail-spec(5)`).<br>|
-| `<appname>:<profile>.dbus-user.ignore.broadcast.portal` | If this attribute exists, `org.freedesktop.portal.*=@/org/freedesktop/portal/*` will not be applied in the `broadcast` rule.|
-| `<appname>:<profile>.dbus-user.ignore.call.portal` | If this attribute exists, `org.freedesktop.portal.*=*` will not be applied in the `call` rule.|
 
 #### System Attributes
 
