@@ -5,5 +5,6 @@ __perms_enable_3d=false
 __perms_enable_webcam=false
 __perms_enable_usb=false
 __perms_enable_sound=false
+__dbus_session_mode="none"
 
 . "${X11APPJAIL_WORKDIR}/appjail.d/run.subr"

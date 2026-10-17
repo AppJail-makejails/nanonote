@@ -1,11 +1,13 @@
 #!/bin/sh
 
 __network_mode="none"
+__dbus_session_mode="none"
 
 . "${X11APPJAIL_WORKDIR}/appjail.d/init.subr"
 . "${X11APPJAIL_WORKDIR}/appjail.d/network.subr"
 . "${X11APPJAIL_WORKDIR}/appjail.d/ephemeral.subr"
 . "${X11APPJAIL_WORKDIR}/appjail.d/fonts.subr"
+. "${X11APPJAIL_WORKDIR}/appjail.d/dbus-dirs.subr"
 . "${X11APPJAIL_WORKDIR}/appjail.d/datadir.subr"
 . "${X11APPJAIL_WORKDIR}/appjail.d/end.subr"
 . "${X11APPJAIL_WORKDIR}/appjail.d/oci.subr"

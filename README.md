@@ -65,13 +65,41 @@ $ x11appjail destroy-jail nanonote
 
 Once you run the AppJail again, the OCI image is pulled again only if it is newer than the one on your system.
 
+### D-Bus
+
+To achieve better integration with the desktop environment, the host's D-Bus is shared via `xdg-dbus-proxy(1)`. By default, the system bus is not shared and the session bus is filtered. This happens transparently and you don't need to do anything. However, you can modify the behavior by creating user attributes that affect how AppJail interprets them when starting the D-Bus proxy.
+
+```console
+$ x11appjail attr put nanonote:default.dbus-user.talk.notifications "org.freedesktop.Notifications"
+```
+
+By defining this attribute, notifications will work as if they were running on your host. Note that this is just an example, and the application running within the jail may or may not use notifications.
+
+Both the session bus and the system bus can be completely disabled by simply setting `<appname>:<profile>.dbus-user` or `<appname>:<profile>.dbus-system` to `none`. The system bus is usually disabled by default, as in most cases only the session bus is needed.
+
+```console
+$ x11appjail attr put nanonote:default.dbus-user none
+```
+
+Note that if you have already started the AppJail, in order for the changes to take effect, you must destroy the jail and then run the AppJail again.
+
+```console
+$ x11appjail destroy-jail nanonote
+```
+
 
 ### Attributes
 #### User Attributes
 
 | Name | Description |
 | --- | --- |
+| `<appname>:<profile>.dbus-system` | Configure the system bus mode. There are three modes:<br><br>1. `filter`: Enables filtering.<br>2. `unfiltered`: Disables filtering. This mode is insecure and is recommended only for development.<br>3. `none`: Completely disables the session bus. This is the default mode unless explicitly stated otherwise.<br>|
+| `<appname>:<profile>.dbus-system.<policy>.*` | Apply a policy or rule to the system bus, where `<type>` can be `own`, `call`, `talk`, `see`, and `broadcast`. See `xdg-dbus-proxy(1)` for details.|
+| `<appname>:<profile>.dbus-user` | Configure the session bus mode. There are three modes:<br><br>1. `filter`: Enables filtering. This is the default mode unless explicitly stated otherwise.<br>2. `unfiltered`: Disables filtering. This mode is insecure and is recommended only for development.<br>3. `none`: Completely disables the session bus.<br>|
+| `<appname>:<profile>.dbus-user.<policy>.*` | Apply a policy or rule to the session bus, where `<type>` can be `own`, `call`, `talk`, `see`, and `broadcast`. See `xdg-dbus-proxy(1)` for details.|
 | `<appname>:<profile>.jail.ephemeral` | Mark the jail as ephemeral. See `ephemeral` option in `appjail-quick(1)` for details.<br><br>Although the jail may be destroyed, its data is preserved in the user directory (see `${X11APPJAIL_USERDIR}` in `x11appjail-spec(5)`).<br>|
+| `<appname>:<profile>.dbus-user.ignore.broadcast.portal` | If this attribute exists, `org.freedesktop.portal.*=@/org/freedesktop/portal/*` will not be applied in the `broadcast` rule.|
+| `<appname>:<profile>.dbus-user.ignore.call.portal` | If this attribute exists, `org.freedesktop.portal.*=*` will not be applied in the `call` rule.|
 
 #### System Attributes
 
@@ -99,3 +127,7 @@ build:
         NO_PKGCLEAN: "1"
       cache_dirs: ["pkgcache0:/var/cache/pkg"]
 ```
+
+## Notes
+
+1. Session bus is disabled by default.
